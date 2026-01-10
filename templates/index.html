@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analyzer</title>
+</head> 
+<body>
+    <form action = "/analyze" method="POST" enctype="multipart/form-data">
+        <input type = "file" name = 'resume' required/>
+        <br><br>
+
+        <textarea
+            name = "job_description"
+            rows="4"
+            cols="50"
+            placeholder="Enter job description"
+            required></textarea>
+        <br><br>
+
+
+        <button type = "submit">Analyze</button>
+    </form>
+    
+</body> 
+</html>
