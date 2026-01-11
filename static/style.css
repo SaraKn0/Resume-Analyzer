@@ -170,3 +170,11 @@ textarea {
     font-size: 14px;
     color: #666;
 }
+
+.history-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+

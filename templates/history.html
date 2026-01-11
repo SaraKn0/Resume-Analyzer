@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Past Resume Analyses</h1>
+
+    {% if history %}
+        {% for item in history %}
+            <div class="history-card">
+                <p><strong>Date:</strong> {{ item.timestamp }}</p>
+                <p><strong>Score:</strong> {{ item.score }}%</p>
+
+                {% if item.missing_skills %}
+                    <p><strong>Missing Skills:</strong>
+                        {% for category, skills in item.missing_skills.items() %}
+                            {% if skills %}
+                                {{ category }}: {{ skills | join(", ") }}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No past analyses yet.</p>
+    {% endif %}
+
+    <p><a href="/">← Back to Analyzer</a></p>
+</div>
+
+</body>
+</html>

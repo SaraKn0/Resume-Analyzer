@@ -4,8 +4,11 @@ from analyzer.preprocess import text_cleaning
 from analyzer.skills import load_taxonomy, detect_skills
 from analyzer.scoring import score_resume
 from analyzer.feedback import generate_feedback
+from analyzer.db import init_db,save_analysis,get_history
+import json
 
 app = Flask(__name__)
+init_db()
 
 @app.route('/')
 def show_form():
@@ -50,6 +53,7 @@ def analyze():
 
     score_breakdown = score_resume(matched_skills_resume,matched_skills_jd,resume_tokens,jd_tokens,resume_cleaned,taxonomy)
     feedback = generate_feedback(missing_skills,resume_cleaned)
+    save_analysis(score =score_breakdown["final_score"],missing_skills=missing_skills)
 
     return render_template(
   "results.html",
@@ -61,6 +65,27 @@ def analyze():
   score_breakdown = score_breakdown,
   feedback = feedback
 )
+
+@app.route('/history')
+def history():
+    rows = get_history()
+
+    history_items = []
+
+    for row in rows:
+        id, timestamp, score, missing_skills_json, job_title = row
+        missing_skills = json.loads(missing_skills_json)
+
+        history_items.append({
+            "id": id,
+            "timestamp": timestamp,
+            "score": score,
+            "missing_skills": missing_skills,
+            "job_title": job_title
+        })
+
+    return render_template("history.html", history=history_items)
+
 
 
 if __name__ == "__main__":
