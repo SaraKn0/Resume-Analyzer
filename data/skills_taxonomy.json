@@ -1,0 +1,45 @@
+{
+  "languages": [
+    "python",
+    "java",
+    "c",
+    "c++",
+    "javascript",
+    "typescript",
+    "sql",
+    "html",
+    "css"
+  ],
+  "frameworks": [
+    "flask",
+    "django",
+    "fastapi",
+    "react",
+    "node",
+    "express"
+  ],
+  "tools": [
+    "git",
+    "github",
+    "docker",
+    "aws",
+    "linux",
+    "vscode",
+    "postman"
+  ],
+  "concepts": [
+    "oop",
+    "object oriented programming",
+    "rest",
+    "rest api",
+    "api",
+    "backend",
+    "frontend",
+    "fullstack",
+    "data structures",
+    "algorithms",
+    "testing",
+    "unit testing",
+    "debugging"
+  ]
+}

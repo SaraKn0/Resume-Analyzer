@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from analyzer.extract import extract_text_from_pdf
 from analyzer.preprocess import text_cleaning
 from analyzer.skills import load_taxonomy, detect_skills
+from analyzer.scoring import score_resume
 
 app = Flask(__name__)
 
@@ -46,13 +47,16 @@ def analyze():
     print(f"JD tokens: {len(jd_tokens)}")
     print("Missing skills:", missing_skills)
 
+    score_breakdown = score_resume(matched_skills_resume,matched_skills_jd,resume_tokens,jd_tokens,resume_cleaned,taxonomy)
+
     return render_template(
   "results.html",
   matched_skills_resume=matched_skills_resume,
   matched_skills_jd=matched_skills_jd,
   missing_skills=missing_skills,
   resume_token_count=len(resume_tokens),
-  jd_token_count=len(jd_tokens)
+  jd_token_count=len(jd_tokens),
+  score_breakdown = score_breakdown
 )
 
 
