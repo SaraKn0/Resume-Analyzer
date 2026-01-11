@@ -1,24 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Resume Analyzer</title>
-</head> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
-    <form action = "/analyze" method="POST" enctype="multipart/form-data">
-        <input type = "file" name = 'resume' required/>
-        <br><br>
 
-        <textarea
-            name = "job_description"
-            rows="4"
-            cols="50"
-            placeholder="Enter job description"
-            required></textarea>
-        <br><br>
+<div class="container">
 
+    <div class="hero">
+        <h1>Resume Analyzer</h1>
+        <p class="subtitle">
+            Upload your resume and a job description to see how well you match — and how to improve.
+        </p>
+    </div>
 
-        <button type = "submit">Analyze</button>
+    <form class="analyze-form" action="/analyze" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label>📄 Upload Resume (PDF)</label>
+            <input type="file" name="resume" accept=".pdf" required>
+        </div>
+
+        <div class="form-group">
+            <label>📝 Paste Job Description</label>
+            <textarea
+                name="job_description"
+                rows="8"
+                placeholder="Paste the job description here..."
+                required></textarea>
+        </div>
+
+        <button type="submit" class="analyze-btn">
+            Analyze Resume ✨
+        </button>
+
     </form>
-    
-</body> 
+
+    <div class="footer-note">
+        <p>Built to help you tailor your resume for each role.</p>
+    </div>
+
+</div>
+
+</body>
 </html>

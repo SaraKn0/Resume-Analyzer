@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- FINAL SCORE -->
+    <div class="score-card">
+        <h1>Resume Match Score</h1>
+        <div class="final-score">{{ score_breakdown.final_score }}%</div>
+    </div>
+
+    <!-- SCORE BREAKDOWN -->
+    <div class="breakdown">
+        <h2>Score Breakdown</h2>
+
+        <div class="bar">
+            <span>Skills Match</span>
+            <div class="bar-bg">
+                <div class="bar-fill" style="width: {{ score_breakdown.skill_score }}%"></div>
+            </div>
+            <span>{{ score_breakdown.skill_score }}%</span>
+        </div>
+
+        <div class="bar">
+            <span>Keyword Match</span>
+            <div class="bar-bg">
+                <div class="bar-fill" style="width: {{ score_breakdown.keyword_score }}%"></div>
+            </div>
+            <span>{{ score_breakdown.keyword_score }}%</span>
+        </div>
+
+        <div class="bar">
+            <span>Resume Structure</span>
+            <div class="bar-bg">
+                <div class="bar-fill" style="width: {{ score_breakdown.sections_score }}%"></div>
+            </div>
+            <span>{{ score_breakdown.sections_score }}%</span>
+        </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="skills-grid">
+        <div class="skills-box">
+            <h2>Skills on Resume</h2>
+            {% for category, skills in matched_skills_resume.items() %}
+                {% if skills %}
+                    <p><strong>{{ category.capitalize() }}:</strong> {{ skills | join(", ") }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="skills-box missing">
+            <h2>Missing Skills</h2>
+            {% for category, skills in missing_skills.items() %}
+                {% if skills %}
+                    <p><strong>{{ category.capitalize() }}:</strong> {{ skills | join(", ") }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div class="feedback">
+        <h2>How to Improve Your Resume</h2>
+        <ul>
+            {% for tip in feedback %}
+                <li>{{ tip }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- TOKEN COUNTS -->
+    <div class="tokens">
+        <p>Resume tokens: {{ resume_token_count }} | JD tokens: {{ jd_token_count }}</p>
+    </div>
+
+</div>
+
+</body>
+</html>

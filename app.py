@@ -3,6 +3,7 @@ from analyzer.extract import extract_text_from_pdf
 from analyzer.preprocess import text_cleaning
 from analyzer.skills import load_taxonomy, detect_skills
 from analyzer.scoring import score_resume
+from analyzer.feedback import generate_feedback
 
 app = Flask(__name__)
 
@@ -48,6 +49,7 @@ def analyze():
     print("Missing skills:", missing_skills)
 
     score_breakdown = score_resume(matched_skills_resume,matched_skills_jd,resume_tokens,jd_tokens,resume_cleaned,taxonomy)
+    feedback = generate_feedback(missing_skills,resume_cleaned)
 
     return render_template(
   "results.html",
@@ -56,7 +58,8 @@ def analyze():
   missing_skills=missing_skills,
   resume_token_count=len(resume_tokens),
   jd_token_count=len(jd_tokens),
-  score_breakdown = score_breakdown
+  score_breakdown = score_breakdown,
+  feedback = feedback
 )
 
 
