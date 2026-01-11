@@ -30,7 +30,7 @@ A full-stack Flask web application that analyzes a resume against a job descript
 
 ---
 
-## 🧠 Tech Stack
+##  Tech Stack
 
 - Backend: Python, Flask
 - Frontend: HTML, CSS (Jinja templates)

@@ -5,7 +5,7 @@ import json
 
 
 def init_db():
-    # Path to database file (project root)
+    
     db_path = Path(__file__).resolve().parent.parent / "history.db"
 
     
